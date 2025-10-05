@@ -6,6 +6,9 @@ import TemplateDemo from "./Templates/DemoReactRouter/TemplateDemo";
 import ReactRouterExercise from "./Components/DemoFunctionComponent/ReactRouterExercise/ReactRouterExercise";
 import DemoApplication from "./Components/DemoApplication";
 import ShoeDetails from "./Components/DemoFunctionComponent/ReactRouterExercise/ShoeDetails";
+import Page404 from "./Components/DemoFunctionComponent/ReactRouterExercise/Page404";
+import { Formik } from "formik";
+import FormikExercise from "./Components/DemoFunctionComponent/Formik Exercise/FormikExercise";
 
 function App() {
   // return <div className="App">
@@ -29,7 +32,10 @@ function App() {
           <Route element={<DemoApplication />} path="application" />
           {/* create a route that can pass an id in the URL to help determine which product the user wants to view */}
           <Route element={<ShoeDetails />} path="detail/:id" />
+          <Route element={<FormikExercise />} path="/cinema"></Route>
         </Route>
+        {/* check page not found  */}
+        <Route element={<Page404 />} path="*"></Route>
       </Routes>
     </>
   );

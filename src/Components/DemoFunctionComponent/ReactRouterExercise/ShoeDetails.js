@@ -7,6 +7,8 @@ const ShoeDetails = () => {
   console.log(param);
 
   const [detail, setDetail] = useState();
+  // The second way to use useEffect is by adding dependencies inside the square brackets.
+  // We pass the data we want to watch, and whenever it changes, useEffect will run again.
 
   useEffect(() => {
     const promise = axios({
@@ -21,7 +23,13 @@ const ShoeDetails = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+
+      //will unmount
+      // return () => {
+      //   console.log("Hello, bye bye!")
+      // }
+
+  }, [param.id]);
 
   console.log(detail);
 
