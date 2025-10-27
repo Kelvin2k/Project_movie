@@ -1,11 +1,13 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { removeUser } from "../../../Redux/slice/userSlice";
 
 const TableUser = () => {
   // useSelector is a hook that allows you to access data from the Redux store's state
   const { arrUser } = useSelector((state) => state.userSlice);
   //redux.arrUser
   console.log(arrUser);
+  const dispatch = useDispatch();
 
   return (
     <div className="mt-5">
@@ -28,6 +30,9 @@ const TableUser = () => {
               <th scope="col" className="px-6 py-3">
                 User Phone Number
               </th>
+              <th scope="col" className="px-6 py-3">
+                Action
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -44,17 +49,33 @@ const TableUser = () => {
             </tr> */}
             {arrUser.map((item, index) => {
               return (
-                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                <tr
+                  key={item.id}
+                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200"
+                >
                   <th
                     scope="row"
                     className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                   >
-                   {item.id}
+                    {item.id}
                   </th>
                   <td className="px-6 py-4">{item.userName}</td>
                   <td className="px-6 py-4">{item.userEmail}</td>
                   <td className="px-6 py-4">{item.userCode}</td>
                   <td className="px-6 py-4">{item.userPhoneNumber}</td>
+                  <td className="px-6 py-4 space-x-3">
+                    <button
+                      className="p-2 text-white bg-red-500"
+                      onClick={() => {
+                        dispatch(removeUser(item.id));
+                      }}
+                    >
+                      Delete
+                    </button>
+                    <button className="p-2 text-white bg-yellow-500">
+                      Modify
+                    </button>
+                  </td>
                 </tr>
               );
             })}

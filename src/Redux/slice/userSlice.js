@@ -1,5 +1,6 @@
 // command to create fast slice structure: rxslice
 import { createSlice } from "@reduxjs/toolkit";
+import { act } from "react";
 
 const initialState = {
   arrUser: [],
@@ -19,9 +20,28 @@ const userSlice = createSlice({
       console.log(action);
       state.arrUser.push(action.payload);
     },
+    removeUser: (state, action) => {
+      // To delete: need an ID to know which user to delete.
+      // Iterate through the array to find the element to delete and its position.
+      // Use splice to delete it.
+      // const index = state.arrUser.findIndex(
+      //   (user) => user.id === action.payload.id
+      // );
+      // state.arrUser.splice(index, 1);
+
+      // state.arrUser.splice((user) => user.id === action.payload.id, 1);
+      // state.arrUser.splice(action.payload.index, 1);
+
+      const index = state.arrUser.findIndex((item) => { //id = 5, action.payLoad = 5
+        return item.id === action.payload.id;
+      });
+      if (index !== -1) {
+        state.arrUser.splice(index, 1);
+      }
+    },
   },
 });
 
-export const { getValueUser } = userSlice.actions;
+export const { getValueUser, removeUser } = userSlice.actions;
 
 export default userSlice.reducer;
