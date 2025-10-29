@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { removeUser } from "../../../Redux/slice/userSlice";
 
-const TableUser = () => {
+const TableUser = ({ setValues }) => {
   // useSelector is a hook that allows you to access data from the Redux store's state
   const { arrUser } = useSelector((state) => state.userSlice);
   //redux.arrUser
@@ -72,7 +72,9 @@ const TableUser = () => {
                     >
                       Delete
                     </button>
-                    <button className="p-2 text-white bg-yellow-500">
+                    <button onClick={() => {
+                      setValues(item)
+                    }} className="p-2 text-white bg-yellow-500">
                       Modify
                     </button>
                   </td>
